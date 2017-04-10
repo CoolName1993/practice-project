@@ -6,7 +6,20 @@ lazy val `practice_project` = (project in file(".")).enablePlugins(PlayScala)
 
 scalaVersion := "2.11.7"
 
-libraryDependencies ++= Seq( jdbc , cache , ws   , specs2 % Test )
+val runtimeDependencies = Seq(
+  jdbc,
+  cache,
+  ws,
+  "org.reactivemongo" %% "reactivemongo" % "0.12.1"
+)
+
+val testDependencies = Seq(
+  "org.scalacheck" %% "scalacheck" % "1.13.4" % Test,
+  "org.scalatest" %% "scalatest" % "3.0.1" % Test,
+  specs2 % Test
+)
+
+libraryDependencies ++= runtimeDependencies ++ testDependencies
 
 unmanagedResourceDirectories in Test <+=  baseDirectory ( _ /"target/web/public/test" )  
 
