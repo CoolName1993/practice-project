@@ -1,4 +1,6 @@
-@()(implicit messages: Messages)
+@import models.Video
+@import views.html.templates.main
+@(videos: Seq[Video])(implicit messages: Messages)
 <!-- Copyright 2017 Christopher Boucher
 
  Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,6 +17,10 @@
 -->
 @main(Messages("index.title")) {
 
-    <h1>@Messages("index.heading")</h1>
+    <h1 id="heading">@Messages("index.heading")</h1>
+
+    <ul id="videos">
+        @videos.map{video => <li><a href="@controllers.routes.VideoController.show(video.id)" id="watch-@video.id">@video.name</a></li>}
+    </ul>
 
 }

@@ -13,27 +13,33 @@
  * limitations under the License.
  */
 
-import org.specs2.mutable._
-import org.specs2.runner._
-import org.junit.runner._
+package utils
 
-import play.api.test._
-import play.api.test.Helpers._
+import play.twirl.api.Html
+import testutils.UnitTest
+import utils.CompressedHtml._
 
-/**
- * add your integration spec here.
- * An integration test will fire up a whole play application in a real (or headless) browser
- */
-@RunWith(classOf[JUnitRunner])
-class IntegrationSpec extends Specification {
+class CompressedHtmlSpec extends UnitTest {
 
-  "Application" should {
+  val testHtml: Html = Html(
+    """
+      |<p>hello</p>
+      |
+      |<p>goodbye</p>
+    """.stripMargin)
+  val testClass = CompressedHtml(testHtml)
+  val expectedResult = Html("<p>hello</p><p>goodbye</p>")
 
-    "work from within a browser" in new WithBrowser {
-
-      browser.goTo("http://localhost:" + port)
-
-      browser.pageSource must contain("Your new application is ready.")
+  "htmlToCompressed" must {
+    "implicitly convert Html to CompressedHtml" in {
+      testHtml.compressed mustBe expectedResult
     }
   }
+
+  "compressed" must {
+    "compress the html" in {
+      testClass.compressed mustBe expectedResult
+    }
+  }
+
 }

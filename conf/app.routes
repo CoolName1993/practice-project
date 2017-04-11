@@ -1,0 +1,8 @@
+GET     /assets/*file               controllers.Assets.at(path="/public", file)
+
+GET     /                           controllers.IndexController.index
+
+GET     /video/:id                  controllers.VideoController.show(id: String)
+
+
+    
