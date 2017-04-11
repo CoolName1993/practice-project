@@ -17,14 +17,16 @@ package controllers
 
 import javax.inject.{Inject, Singleton}
 
+import models.Video
 import play.api.i18n.MessagesApi
 import play.api.mvc.{Action, AnyContent}
+import utils.CompressedHtml._
 
 @Singleton
 class VideoController @Inject()()(implicit val messagesApi: MessagesApi) extends FrontendController {
 
   def show(id: String): Action[AnyContent] = Action { implicit request =>
-    Ok
+    Ok(views.html.video(Video(id,"TEST")).compressed)
   }
 
 }
