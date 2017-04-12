@@ -17,6 +17,7 @@ lazy val `practice_project` = (project in file("."))
   .enablePlugins(PlayScala)
   .configs(IntegrationTest)
   .settings(inConfig(IntegrationTest)(Defaults.itSettings): _*)
+  .settings(licenses += ("Apache-2.0", url("https://www.apache.org/licenses/LICENSE-2.0.html")))
 
 scalaVersion := "2.11.10"
 
